@@ -2,26 +2,46 @@
 
 {% block content %}
 
-<h2>Login</h2>
+<div
+    class="d-flex justify-content-center align-items-center"
+    style="min-height:80vh;"
+>
 
-<form method="post">
+    <div
+        class="card p-5"
+        style="width:450px;"
+    >
 
-    {% csrf_token %}
+        <h2 class="text-center mb-4">
+            Login
+        </h2>
 
-    {{ form.as_p }}
+        <form method="post">
 
-    <button type="submit"
-            class="btn btn-success">
+            {% csrf_token %}
 
-        Login
+            {{ form.as_p }}
 
-    </button>
+            <button
+                type="submit"
+                class="btn btn-success w-100"
+            >
+                Login
+            </button>
 
-</form>
+        </form>
 
-<br>
+        <br>
 
-<a href="/signup/">
-    Create New Account
-</a>
+        <a
+            href="/signup/"
+            class="text-center"
+        >
+            Create New Account
+        </a>
+
+    </div>
+
+</div>
+
 {% endblock %}

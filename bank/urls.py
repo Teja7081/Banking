@@ -29,6 +29,12 @@ urlpatterns = [
     ),
 
     path(
+        'profile/',
+        views.profile,
+        name='profile'
+    ),
+
+    path(
         'transfer/',
         views.transfer,
         name='transfer'

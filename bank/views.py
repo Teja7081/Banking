@@ -12,6 +12,8 @@ from .forms import SignupForm
 
 from .models import Account, Transaction
 
+import random
+
 
 def signup_view(request):
 
@@ -22,8 +24,37 @@ def signup_view(request):
         user = form.save()
 
         Account.objects.create(
+
             user=user,
-            balance=1000
+
+            balance=1000,
+
+            account_number=str(
+                random.randint(
+                    10000000000000,
+                    99999999999999
+                )
+            ),
+
+            upi_id=f"{user.username}@safebank",
+
+            card_number=str(
+                random.randint(
+                    1000000000000000,
+                    9999999999999999
+                )
+            ),
+
+            cvv=str(
+                random.randint(
+                    100,
+                    999
+                )
+            ),
+
+            expiry_date="12/30",
+
+            ifsc_code="SAFE0001234"
         )
 
         login(request, user)
@@ -73,6 +104,18 @@ def dashboard(request):
     return render(request, 'dashboard.html', {
         'account': account,
         'transactions': transactions
+    })
+
+
+@login_required
+def profile(request):
+
+    account = Account.objects.get(
+        user=request.user
+    )
+
+    return render(request, 'profile.html', {
+        'account': account
     })
 
 
