@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+    Transfer Money
+</h2>
+
+<p class="text-danger">
+    {{ message }}
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="username"
+        class="form-control mb-3"
+        placeholder="Receiver Username"
+    >
+
+    <select
+        name="payment_method"
+        class="form-control mb-3"
+        id="method"
+    >
+
+        <option value="UPI">
+            UPI
+        </option>
+
+        <option value="Net Banking">
+            Net Banking
+        </option>
+
+        <option value="Debit Card">
+            Debit Card
+        </option>
+
+        <option value="Credit Card">
+            Credit Card
+        </option>
+
+    </select>
+
+    <div id="upiBox">
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Enter UPI ID"
+        >
+
+    </div>
+
+    <div id="netBox" style="display:none;">
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Account Number"
+        >
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="IFSC Code"
+        >
+
+    </div>
+
+    <div id="cardBox" style="display:none;">
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Card Number"
+        >
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="CVV"
+        >
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Expiry Date"
+        >
+
+    </div>
+
+    <input
+        type="number"
+        name="amount"
+        class="form-control mb-3"
+        placeholder="Enter Amount"
+    >
+
+    <button class="btn btn-primary">
+
+        Transfer
+
+    </button>
+
+</form>
+
+<script>
+
+    const method = document.getElementById('method');
+
+    const upiBox = document.getElementById('upiBox');
+
+    const netBox = document.getElementById('netBox');
+
+    const cardBox = document.getElementById('cardBox');
+
+    method.addEventListener('change', function () {
+
+        upiBox.style.display = 'none';
+
+        netBox.style.display = 'none';
+
+        cardBox.style.display = 'none';
+
+        if (this.value === 'UPI') {
+
+            upiBox.style.display = 'block';
+
+        }
+
+        else if (this.value === 'Net Banking') {
+
+            netBox.style.display = 'block';
+
+        }
+
+        else {
+
+            cardBox.style.display = 'block';
+
+        }
+
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+    Transaction History
+</h2>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+
+        <td>
+            {{ transaction.transaction_type }}
+        </td>
+
+        <td>
+            ₹{{ transaction.amount }}
+        </td>
+
+        <td>
+            {{ transaction.created_at }}
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
