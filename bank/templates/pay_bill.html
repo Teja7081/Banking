@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-6">
+
+        <div class="card p-4">
+
+            <h2 class="mb-4">
+                Pay Credit Card Bill
+            </h2>
+
+            <p class="text-success">
+                {{ message }}
+            </p>
+
+            <div class="mb-4">
+
+                <h5>
+                    Due Amount
+                </h5>
+
+                <h1 class="text-danger">
+                    ₹5,000
+                </h1>
+
+            </div>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <label class="mb-2">
+                    Select Payment Method
+                </label>
+
+                <select
+                    name="payment_method"
+                    class="form-control mb-4"
+                >
+
+                    <option>
+                        UPI
+                    </option>
+
+                    <option>
+                        Net Banking
+                    </option>
+
+                    <option>
+                        Debit Card
+                    </option>
+
+                </select>
+
+                <button
+                    class="btn btn-primary w-100"
+                >
+                    PAY NOW
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

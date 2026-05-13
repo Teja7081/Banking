@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 from .forms import SignupForm
 
-from .models import Account, Transaction
+from .models import Account, Transaction, Card
 
 import random
 
@@ -202,4 +202,86 @@ def transactions(request):
 
     return render(request, 'transactions.html', {
         'transactions': transactions
+    })
+
+@login_required
+def pay_bill(request):
+
+    message = ''
+
+    if request.method == 'POST':
+
+        amount = 5000
+
+        payment_method = request.POST['payment_method']
+
+        account = Account.objects.get(
+            user=request.user
+        )
+
+        if account.balance >= amount:
+
+            account.balance -= amount
+
+            account.save()
+
+            Transaction.objects.create(
+                user=request.user,
+                transaction_type=f'Credit Card Bill Paid via {payment_method}',
+                amount=amount
+            )
+
+            message = 'Bill Payment Successful'
+
+        else:
+
+            message = 'Insufficient Balance'
+
+    return render(request, 'pay_bill.html', {
+        'message': message
+    })
+
+@login_required
+def add_card(request):
+
+    message = ''
+
+    if request.method == 'POST':
+
+        card_number = request.POST['card_number']
+
+        cvv = request.POST['cvv']
+
+        expiry_date = request.POST['expiry_date']
+
+        card_type = request.POST['card_type']
+
+        Card.objects.create(
+
+            user=request.user,
+
+            card_number=card_number,
+
+            cvv=cvv,
+
+            expiry_date=expiry_date,
+
+            card_type=card_type
+        )
+
+        message = 'Card Added Successfully'
+
+    return render(request, 'add_card.html', {
+        'message': message
+    })
+
+@login_required
+def cards(request):
+
+    cards = Card.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
+
+    return render(request, 'cards.html', {
+        'cards': cards
     })

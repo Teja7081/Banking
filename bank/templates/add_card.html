@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-6">
+
+        <div class="card p-4">
+
+            <h2 class="mb-4">
+                Add New Card
+            </h2>
+
+            <p class="text-success">
+                {{ message }}
+            </p>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <select
+                    name="card_type"
+                    class="form-control mb-3"
+                >
+
+                    <option>
+                        Debit Card
+                    </option>
+
+                    <option>
+                        Credit Card
+                    </option>
+
+                </select>
+
+                <input
+                    type="text"
+                    name="card_number"
+                    class="form-control mb-3"
+                    placeholder="Enter Card Number"
+                >
+
+                <input
+                    type="text"
+                    name="cvv"
+                    class="form-control mb-3"
+                    placeholder="Enter CVV"
+                >
+
+                <input
+                    type="text"
+                    name="expiry_date"
+                    class="form-control mb-4"
+                    placeholder="MM/YY"
+                >
+
+                <button
+                    class="btn btn-primary w-100"
+                >
+                    ADD CARD
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

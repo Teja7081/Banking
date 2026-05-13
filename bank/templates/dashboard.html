@@ -61,18 +61,19 @@
                 <div class="small-card p-3">
 
                     <h5>
-                        UPI ACCOUNT
+                        ADD CARD
                     </h5>
 
                     <p>
-                        {{ account.upi_id }}
+                        Add debit or credit cards
                     </p>
 
-                    <button
+                    <a
+                        href="/add-card/"
                         class="btn btn-dark mt-2"
                     >
-                        Transfer
-                    </button>
+                        Add Card
+                    </a>
 
                 </div>
 
@@ -90,11 +91,12 @@
                         **** {{ account.card_number|slice:"12:" }}
                     </p>
 
-                    <button
+                    <a
+                        href="/cards/"
                         class="btn btn-dark mt-2"
                     >
                         View
-                    </button>
+                    </a>
 
                 </div>
 
@@ -105,49 +107,48 @@
     </div>
 
     <!-- Quick Actions -->
-
     <div class="col-lg-4">
 
-        <div class="quick-actions p-4">
+    <div class="quick-actions p-4">
 
-            <h4 class="mb-4">
-                QUICK ACTIONS
-            </h4>
+        <h4 class="mb-4">
+            CREDIT CARD
+        </h4>
 
-            <a
-                href="/transfer/"
-                class="btn btn-primary w-100 mb-3"
-            >
-                TRANSFER MONEY
-            </a>
+        <div class="mb-4">
 
-            <a
-                href="/check-balance/"
-                class="btn btn-success w-100 mb-3"
-            >
-                CHECK BALANCE
-            </a>
+            <h6>
+                Remaining Limit
+            </h6>
 
-            <a
-                href="/transactions/"
-                class="btn btn-warning w-100 mb-3"
-            >
-                TRANSACTION HISTORY
-            </a>
-
-            <a
-                href="/profile/"
-                class="btn btn-info w-100"
-            >
-                MY PROFILE
-            </a>
+            <h2>
+                ₹45,000
+            </h2>
 
         </div>
+
+        <div class="mb-4">
+
+            <h6>
+                Due Amount
+            </h6>
+
+            <h3 class="text-danger">
+                ₹5,000
+            </h3>
+
+        </div>
+
+        <a
+            href="/pay-bill/"
+            class="btn btn-primary w-100"
+        >
+            PAY DUE
+        </a>
 
     </div>
 
 </div>
-
 <!-- Transactions -->
 
 <div class="transaction-table p-4 mt-4">

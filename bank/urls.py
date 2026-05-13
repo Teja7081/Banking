@@ -51,4 +51,19 @@ urlpatterns = [
         views.transactions,
         name='transactions'
     ),
+    path(
+        'pay-bill/',
+        views.pay_bill,
+        name='pay_bill'
+    ),
+    path(
+        'add-card/',
+        views.add_card,
+        name='add_card'
+    ),
+    path(
+        'cards/',
+        views.cards,
+        name='cards'
+    ),
 ]

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mb-4">
+
+    <h2>
+        My Cards
+    </h2>
+
+    <a
+        href="/add-card/"
+        class="btn btn-primary"
+    >
+        Add New Card
+    </a>
+
+</div>
+
+<div class="row">
+
+    {% for card in cards %}
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="credit-card-ui p-4">
+
+            <div class="d-flex justify-content-between">
+
+                <h5>
+                    {{ card.card_type }}
+                </h5>
+
+                <h5>
+                    SafeBank
+                </h5>
+
+            </div>
+
+            <div class="mt-5">
+
+                <h4>
+                    **** **** ****
+                    {{ card.card_number|slice:"12:" }}
+                </h4>
+
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <div>
+
+                    <small>
+                        Expiry
+                    </small>
+
+                    <p>
+                        {{ card.expiry_date }}
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <small>
+                        CVV
+                    </small>
+
+                    <p>
+                        {{ card.cvv }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <h4>
+        No Cards Added
+    </h4>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
