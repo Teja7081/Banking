@@ -95,3 +95,32 @@ class Card(models.Model):
     def __str__(self):
 
         return self.card_number
+class Loan(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    loan_amount = models.IntegerField()
+
+    interest_rate = models.FloatField(
+        default=10
+    )
+
+    tenure_months = models.IntegerField()
+
+    emi = models.FloatField()
+
+    status = models.CharField(
+        max_length=20,
+        default='Pending'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.user.username
