@@ -158,12 +158,38 @@ def transfer(request):
                 user=receiver
             )
 
-            if sender_account.balance >= amount:
+            if payment_method == 'Credit Card':
 
-                sender_account.balance -= amount
+                sender_account.credit_card_due += amount
+
                 sender_account.save()
 
                 receiver_account.balance += amount
+
+                receiver_account.save()
+
+                Transaction.objects.create(
+                    user=request.user,
+                    transaction_type='Credit Card Used',
+                    amount=amount
+                )
+
+                Transaction.objects.create(
+                    user=receiver,
+                    transaction_type='Credit Card Received',
+                    amount=amount
+                )
+
+                message = 'Transfer Successful'
+
+            elif sender_account.balance >= amount:
+
+                sender_account.balance -= amount
+
+                sender_account.save()
+
+                receiver_account.balance += amount
+
                 receiver_account.save()
 
                 Transaction.objects.create(
@@ -209,19 +235,21 @@ def pay_bill(request):
 
     message = ''
 
+    account = Account.objects.get(
+        user=request.user
+    )
+
     if request.method == 'POST':
 
-        amount = 5000
+        amount = account.credit_card_due
 
         payment_method = request.POST['payment_method']
-
-        account = Account.objects.get(
-            user=request.user
-        )
 
         if account.balance >= amount:
 
             account.balance -= amount
+
+            account.credit_card_due = 0
 
             account.save()
 
@@ -238,7 +266,8 @@ def pay_bill(request):
             message = 'Insufficient Balance'
 
     return render(request, 'pay_bill.html', {
-        'message': message
+        'message': message,
+        'account': account
     })
 
 @login_required

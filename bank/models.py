@@ -37,6 +37,9 @@ class Account(models.Model):
     ifsc_code = models.CharField(
         max_length=20
     )
+    credit_card_due=models.IntegerField(
+        default=0
+    )
 
     def __str__(self):
         return self.user.username
