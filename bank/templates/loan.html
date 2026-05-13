@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7">
+
+        <div class="card p-4">
+
+            <h2 class="mb-4">
+                Apply Loan
+            </h2>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <label class="mb-2">
+                    Loan Amount
+                </label>
+
+                <input
+                    type="number"
+                    name="loan_amount"
+                    class="form-control mb-4"
+                    placeholder="Enter Loan Amount"
+                >
+
+                <label class="mb-2">
+                    Loan Type
+                </label>
+
+                <select
+                    name="loan_type"
+                    class="form-control mb-4"
+                >
+
+                    <option>
+                        Personal Loan
+                    </option>
+
+                    <option>
+                        Home Loan
+                    </option>
+
+                    <option>
+                        Education Loan
+                    </option>
+
+                    <option>
+                        Vehicle Loan
+                    </option>
+
+                </select>
+
+                <label class="mb-2">
+                    Tenure (Months)
+                </label>
+
+                <select
+                    name="tenure"
+                    class="form-control mb-4"
+                >
+
+                    <option>
+                        12
+                    </option>
+
+                    <option>
+                        24
+                    </option>
+
+                    <option>
+                        36
+                    </option>
+
+                    <option>
+                        60
+                    </option>
+
+                </select>
+
+                <div class="loan-info-box p-3 mb-4">
+
+                    <h5>
+                        Interest Rate:
+                        10%
+                    </h5>
+
+                    <h5>
+                        Estimated EMI:
+                        ₹4,500/month
+                    </h5>
+
+                </div>
+
+                <button
+                    class="btn btn-primary w-100"
+                >
+                    APPLY LOAN
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
